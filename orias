@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orias - First Activity</title>
+</head>
+<body>
+    <form action="" method="post">
+
+        <label for="month">Select a month:</label>
+        <select id="month" name="month">
+            <?php
+            $currentMonth = date("F"); 
+            $months = array();
+            for ($i = 0; $i < 12; $i++) {
+                $months[] = date("F", strtotime("+$i month"));
+            }
+            foreach ($months as $month) {
+                echo "<option value='$month' " . ($month == $currentMonth ? "selected" : "") . ">$month</option>";
+            }
+            ?>
+        </select>
+
+        <label for="day">Select a day:</label>
+        <select id="day" name="day">
+            <?php
+            $currentDay = date('l'); // Get current day of the week (e.g., "Tuesday")
+            $days = [];
+
+            for ($i = 0; $i < 7; $i++) {
+                $days[] = date('l', strtotime("+$i day"));
+            }
+
+            foreach ($days as $day) {
+                echo "<option value='$day'>$day</option>";
+            }
+            ?>
+        </select>   
+
+        <button type="submit" name="submit">Show Date</button>
+    </form>
+
+    <?php
+
+    function countDaysInMonth($month, $dayName) {
+        // Define month numbers
+        $monthNames = [
+            "January" => 1, "February" => 2, "March" => 3, "April" => 4,
+            "May" => 5, "June" => 6, "July" => 7, "August" => 8,
+            "September" => 9, "October" => 10, "November" => 11, "December" => 12
+        ];
+
+        $monthNum = $monthNames[$month];
+
+        $year = 2024;
+
+        $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $monthNum, $year);
+
+        $dayCount = 0;
+        $datesOfDay = [];
+
+        $firstDayOfMonth = DateTime::createFromFormat('Y-m-d', "$year-$monthNum-01");
+        $startDay = $firstDayOfMonth->format('w'); // Day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+
+        for ($day = 1; $day <= $daysInMonth; $day++) {
+            $date = DateTime::createFromFormat('Y-m-d', "$year-$monthNum-$day");
+            $currentDayName = $date->format('l'); // Gets full name of the day (e.g., "Tuesday")
+
+            if ($currentDayName === $dayName) {
+                $dayCount++;
+                $datesOfDay[] = $day; // Store the date
+            }
+        }
+
+        $totalWeeks = ceil(($daysInMonth + $startDay) / 7); 
+
+        $result = "There are " . $totalWeeks . " weeks in the month of $month and " . 
+                  $dayCount . " $dayName(s) in $month 2024, and those are: " . 
+                  implode(", ", $datesOfDay) . ".";
+
+        return $result;
+    }
+
+    if (isset($_POST['submit'])) {
+        $selectedMonth = $_POST['month'];
+        $selectedDay = $_POST['day'];
+
+        $result = countDaysInMonth($selectedMonth, $selectedDay);
+
+        echo "<p>$result</p>";
+    }
+    ?>
+</body>
+</html>
