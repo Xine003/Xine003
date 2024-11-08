@@ -9,7 +9,7 @@
     <form action="" method="post">
 
         <label for="month">Select a month:</label>
-        <select id="month" name="month">
+        <select id="month" ="month">
             <?php
             $currentMonth = date("F"); 
             $months = array();
@@ -23,7 +23,7 @@
         </select>
 
         <label for="day">Select a day:</label>
-        <select id="day" name="day">
+        <select id="day" ="day">
             <?php
             $currentDay = date('l'); // Get current day of the week (e.g., "Tuesday")
             $days = [];
