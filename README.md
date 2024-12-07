@@ -1,6 +1,4 @@
-### Hi there 👋
-
-- 🌱 I’m currently learning Cybersecurity / Cloud
+Discovering something that doesn't exist.
 
 
 
