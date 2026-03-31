@@ -22,7 +22,7 @@
 
 ### 🔥 What I'm Working On
 - 🚀 Building network architecture with **Cisco Packet Tracer**
-- 📱 Developing web applications with **React Native & Node.JS**
+- 📱 Developing web applications with **React.JS & Node.JS**
 - 🤖 Exploring **Data Analysis** with Python Pandas
 - ☁️ Learning **Cybersecurity Blue Team** operations
 
